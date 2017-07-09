@@ -65,10 +65,10 @@ class Home extends React.Component {
     return (
       <Container>
         <Header as='h1' id='main-header'>
-          ToadTryp
+          Road Tryp
         </Header>
         <Header as='h2' id='main-header2'>
-          Go anywhere with a fellow Toad.
+          Go anywhere.
         </Header>
         <Search currentUser={this.props.currentUser} depart={this.state.depart} arrive={this.state.arrive} seats={this.state.seats} handleChange={this.handleChange.bind(this)} date={this.state.date} handleDate={this.handleDate.bind(this)} focused={this.state.focused} handleFocus={this.handleFocus.bind(this)}/>
         <div className="container">
