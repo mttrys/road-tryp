@@ -44,6 +44,7 @@
     "mocha": "^3.4.2",
     "moment": "^2.18.1",
     "mysql": "^2.13.0",
+    "nodemon": "^1.11.0",
     "passport-google-oauth2": "^0.1.6",
     "query-string": "^4.3.4",
     "react": "^15.6.1",
