@@ -1,0 +1,1 @@
+Used Sequel Pro for Mac to seed the database. 

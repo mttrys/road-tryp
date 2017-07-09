@@ -60,19 +60,19 @@ CREATE TABLE IF NOT EXISTS trips_toads (
 );
 
 CREATE TABLE IF NOT EXISTS driver_reviews(
-    id INT NOT NULL AUTO_INCREMENT,
-    rider_id INT NOT NULL,
-    driver_id INT NOT NULL,
-    overall_rating INT NOT NULL,
-    communication_rating INT NOT NULL,
-    driving_rating INT NOT NULL,
-    accuracy_rating INT NOT NULL,
-    written_review TEXT NOT NULL,
-    add_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (rider_id) REFERENCES users(id),
-    FOREIGN KEY (driver_id) REFERENCES users(id)
-    );
+  id INT NOT NULL AUTO_INCREMENT,
+  rider_id INT NOT NULL,
+  driver_id INT NOT NULL,
+  overall_rating INT NOT NULL,
+  communication_rating INT NOT NULL,
+  driving_rating INT NOT NULL,
+  accuracy_rating INT NOT NULL,
+  written_review TEXT NOT NULL,
+  add_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (rider_id) REFERENCES users(id),
+  FOREIGN KEY (driver_id) REFERENCES users(id)
+);
 
 -- DUMMY DATA --
 
@@ -115,8 +115,8 @@ INSERT INTO trips (
     90210,
     4,
     65
-  );
-  INSERT INTO trips (
+);
+INSERT INTO trips (
   driver_id,
   departure_date,
   departure_time,
@@ -147,9 +147,8 @@ INSERT INTO trips (
     90210,
     2,
     125
-  );
-
-  INSERT INTO trips (
+);
+INSERT INTO trips (
   driver_id,
   departure_date,
   departure_time,
@@ -180,8 +179,8 @@ INSERT INTO trips (
     90210,
     4,
     70
-  );
-  INSERT INTO trips (
+);
+INSERT INTO trips (
   driver_id,
   departure_date,
   departure_time,
@@ -212,14 +211,15 @@ INSERT INTO trips (
     80210,
     3,
     25
-  );
+);
 
-  INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '944 Market St'), (SELECT id FROM users WHERE first_name = 'Jun'));
-  INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '555 McKinney St'), (SELECT id FROM users WHERE first_name = 'Solomon'));
-  INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '351 King St'), (SELECT id FROM users WHERE first_name = 'Dylan'));
-  INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '728 E 4th St'), (SELECT id FROM users WHERE first_name = 'Kirk'));
+INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '944 Market St'), (SELECT id FROM users WHERE first_name = 'Jun'));
+INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '555 McKinney St'), (SELECT id FROM users WHERE first_name = 'Solomon'));
+INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '351 King St'), (SELECT id FROM users WHERE first_name = 'Dylan'));
+INSERT INTO trips_toads (trip_id, user_id) VALUES ((SELECT id FROM trips WHERE departure_address_line1 = '728 E 4th St'), (SELECT id FROM users WHERE first_name = 'Kirk'));
 
-    INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (1, 2, 4, 3, 5, 4, 'This was a great trip. Thank you!!');
-    INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (2, 3, 4, 3, 5, 4, 'This tryp was aight');
+
+INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (1, 2, 4, 3, 5, 4, 'This was a great trip. Thank you!!');
+INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (2, 3, 4, 3, 5, 4, 'This tryp was aight');
 INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (4, 6, 4, 3, 5, 4, 'This tryp was pretty cool I guess');
 INSERT INTO driver_reviews ( rider_id,driver_id, overall_rating, communication_rating, driving_rating, accuracy_rating, written_review ) VALUES (4, 6, 3, 3, 5, 4, 'This tryp was tight');
