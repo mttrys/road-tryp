@@ -156,15 +156,15 @@ app.get('/api/maps/', (req, res) => {
   let query = `select * from trips
                where departure_city LIKE '${req.query.depart}%' and
                      arrival_city LIKE '${req.query.arrive}%' and
-                     departure_date = '2017-07-08';`;
-  console.log('query: ', query);
+                     departure_date = '2017-07-10';`; // date is hard coded
+  console.log('**** query: ', query);
   db.raw(query)
   .then((trips) => {
     if(trips.length !== 0) {
       //keep add coordinate information for each city and store it in tripsWithCoord
       let tripsWithCoord = [];
       //Iterate each trip info and add city coordinates
-      console.log('trips models: ', trips[0])
+      // console.log('**** trips models: ', trips[0])
       Promise.each(trips[0], function(trip) {
         return cityCoord(trip.arrival_city, trip.departure_city).then((data) => {
           trip.depart_city_coord = data[0];
@@ -179,8 +179,12 @@ app.get('/api/maps/', (req, res) => {
       }).then((data) => {
         //print coordinates for each city
         data.forEach(city => {
+          console.log('Departure City: ', city.departure_city)
           console.log(city.depart_city_coord);
+
+          console.log('Arrival City: ', city.arrival_city)
           console.log(city.arrival_city_coord);
+          console.log('\n')
         })
         console.log('\tSUCCESS\n');
         //send modifyied trips
@@ -196,8 +200,9 @@ app.get('/api/maps/', (req, res) => {
   });
 });
 
+/**************Trips***************/
 app.get('/api/trips', (req, res) => {
- console.log('GET /api/trips/\n', req.query);
+ // console.log('GET /api/trips/\n', req.query);
  const search = {};
  if (req.query.depart) search.departure_city = req.query.depart;
  if (req.query.arrive) search.arrival_city = req.query.arrive;
@@ -205,23 +210,23 @@ app.get('/api/trips', (req, res) => {
  models.Trip.where(search)
  .fetchAll({withRelated: ['driver','riders']})
  .then((trips) => {
-   console.log('\tSUCCESS\n');
+   // console.log('\tSUCCESS\n');
    res.status(200).json(trips);
  })
  .catch((err) => {
-   console.log('ERROR GETting Trips collection: ', err);
+   // console.log('ERROR GETting Trips collection: ', err);
    res.status(404).send(err);
  });
 });
 
 app.get('/api/trips/:tripId', (req,res) => {
   const id = req.params.tripId;
-  console.log(`GET /api/trips/${id}`);
+  // console.log(`GET /api/trips/${id}`);
   models.Trip.forge({ id })
   .fetch({withRelated: ['driver','riders']})
   .then( (trip) => {
     if (trip) {
-      console.log('\tSUCCESS\n');
+      // console.log('\tSUCCESS\n');
       res.status(200).send(trip.toJSON());
     } else {
       throw trip;
@@ -229,20 +234,20 @@ app.get('/api/trips/:tripId', (req,res) => {
   })
   .catch( err => {
     const message = `\tUnable to find trip with id: ${id}`
-    console.error(message);
+    // console.error(message);
     res.status(404).send({ message });
   });
 });
 
 app.post('/api/trips', (req, res) => {
   let trip = req.body;
-  console.log('POSTing trip data: ', trip);
+  // console.log('POSTing trip data: ', trip);
   models.Trip.forge(trip).save()
   .then( (trip) => {
     res.status(201).send(trip);
   })
   .catch( (err) => {
-    console.log('ERROR POSTing Trip model: ', err);
+    // console.log('ERROR POSTing Trip model: ', err);
     res.status(500).send(err);
   });
 });
